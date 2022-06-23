@@ -1,7 +1,7 @@
-// Creating app... done, ⬢ fathomless-headland-63810
-// https://fathomless-headland-63810.herokuapp.com/ | https://git.heroku.com/fathomless-headland-63810.git
+// https://fathomless-headland-63810.herokuapp.com/
+//fathomless-plains-16786.herokuapp.com/
 
-var uniqid = require("uniqid");
+https: var uniqid = require("uniqid");
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
@@ -13,9 +13,6 @@ console.log(notes);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.listen(PORT, () => {
-  console.log(`API server now on port ${PORT}!`);
-});
 
 //
 let noteTitle;
@@ -203,3 +200,7 @@ if (window.location.pathname === "/notes") {
 }
 
 getAndRenderNotes();
+
+app.listen(PORT, () => {
+  console.log(`API server now on port ${PORT}!`);
+});
