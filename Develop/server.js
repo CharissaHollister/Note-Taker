@@ -7,17 +7,33 @@ const fs = require("fs");
 const generateUniqueId = require("generate-unique-id");
 
 // Initialize and parse express app
-const app = express();
 const PORT = process.env.PORT || 3001;
-app.use(express.urlencoded({ extended: true }));
+const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-//pull in routes
-require("./public/routes/routes.js");
-app.get("/", (req, res) =>
+app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/index.html"))
 );
+
+/////////////////pull in routes
+// require("./public/routes/routes.js");
+app.get("/api/notes", (req, res) => {
+  fs.readFile("./db/db.json", "utf8", (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      // Convert string into JSON object
+      const notes = JSON.parse(data);
+      console.log("data", data);
+      console.log("notes", notes);
+
+      res.json(notes);
+    }
+  });
+});
+/////////////end of routes
 
 //run app listener
 app.listen(PORT, () =>
