@@ -21,11 +21,10 @@ app.use(express.static("public"));
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/index.html"))
 );
-
+//put notes in html
 app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/notes.html"))
 );
-
 //get notes from db and parse them
 app.get("/api/notes", (req, res) => {
   fs.readFile("./db/db.json", "utf8", (err, data) => {
@@ -41,7 +40,6 @@ app.get("/api/notes", (req, res) => {
     }
   });
 });
-
 //look for new notes and add to db
 app.post("/api/notes", (req, res) => {
   fs.readFile("./db/db.json", "utf8", (err, data) => {
@@ -49,8 +47,7 @@ app.post("/api/notes", (req, res) => {
       console.error(err);
     } else {
       ////need to add logic to not fail if notes is empty?
-      let notes = [];
-      notes.push(JSON.parse(data));
+      let notes = JSON.parse(data);
       console.log("notes observed");
       notes.push(req.body);
       fs.writeFile("./db/db.json", notes, (err) => {
@@ -63,7 +60,25 @@ app.post("/api/notes", (req, res) => {
     }
   });
 });
-
+//Remove a note from db
+app.post("/api/notes", (req, res) => {
+  fs.readFile("./db/db.json", "utf8", (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      ////need to add logic to not fail if notes is empty?
+      let notes = JSON.parse(data);
+      notes.pop(req.body);
+      fs.writeFile("./db/db.json", notes, (err) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        console.log("deleted successfully");
+      });
+    }
+  });
+});
 /////////////end of routes
 
 //run app listener
