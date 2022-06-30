@@ -42,40 +42,26 @@ app.get("/api/notes", (req, res) => {
 });
 //look for new notes and add to db
 app.post("/api/notes", (req, res) => {
-  fs.readFile("./db/db.json", "utf8", (err, data) => {
+  fs.writeFile("./db/db.json", note, (err) => {
     if (err) {
-      console.error(err);
     } else {
-      ////need to add logic to not fail if notes is empty?
-      let notes = JSON.parse(data);
-      console.log("notes observed");
-      notes.push(req.body);
-      fs.writeFile("./db/db.json", notes, (err) => {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        console.log("written successfully");
-      });
+      // const notes = req.body;
+      console.log("saving notes");
+      res.json(note);
     }
+    console.log("written successfully");
   });
 });
-//Remove a note from db
-app.post("/api/notes", (req, res) => {
-  fs.readFile("./db/db.json", "utf8", (err, data) => {
+//delete note
+app.delete("/api/notes/:id", (req, res) => {
+  fs.writeFile("./db/db.json", notes, (err) => {
     if (err) {
       console.error(err);
     } else {
-      ////need to add logic to not fail if notes is empty?
-      let notes = JSON.parse(data);
-      notes.pop(req.body);
-      fs.writeFile("./db/db.json", notes, (err) => {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        console.log("deleted successfully");
-      });
+      // Convert string into JSON object
+      // const notes = JSON.stringify(data);
+      console.log("delete");
+      res.json.stringify(notes); ///or should it be res.send???
     }
   });
 });
