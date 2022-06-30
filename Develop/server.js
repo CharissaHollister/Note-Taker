@@ -49,7 +49,8 @@ app.post("/api/notes", (req, res) => {
   //     const notes = data + req.body;
   // notes.push(req.body);
   // res.json(notes);
-  const note = req.body;
+  console.log(res.body, req.body);
+  const note = res.body;
   fs.writeFile("./db/db.json", note, (err) => {
     if (err) {
     } else {
