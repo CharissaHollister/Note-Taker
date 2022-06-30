@@ -76,6 +76,7 @@ const handleNoteSave = () => {
     getAndRenderNotes();
     renderActiveNote();
   });
+  // .catch((err) => console.log(err)); //added by me
 };
 
 // Delete the clicked note
@@ -85,7 +86,7 @@ const handleNoteDelete = (e) => {
 
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute("data-note")).id;
-
+  console.log(noteId);
   if (activeNote.id === noteId) {
     activeNote = {};
   }
@@ -147,6 +148,7 @@ const renderNoteList = async (notes) => {
         "text-danger",
         "delete-note"
       );
+      delBtnEl.innerHTML = "D"; //remove later, for testing only
       delBtnEl.addEventListener("click", handleNoteDelete);
 
       liEl.append(delBtnEl);
