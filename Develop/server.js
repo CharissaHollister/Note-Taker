@@ -50,12 +50,12 @@ app.post("/api/notes", (req, res) => {
   // notes.push(req.body);
   // res.json(notes);
   console.log(res.body, req.body);
-  const note = res.body;
+  const note = json.stringify(req.body);
   fs.writeFile("./db/db.json", note, (err) => {
     if (err) {
     } else {
       console.log("saving notes");
-      res.send(note);
+      res.append(note);
     }
     console.log("written successfully");
   });
