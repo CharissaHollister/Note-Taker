@@ -49,13 +49,13 @@ app.post("/api/notes", (req, res) => {
   //     const notes = data + req.body;
   // notes.push(req.body);
   // res.json(notes);
-  console.log(res.body, req.body);
-  const note = json.stringify(req.body);
-  fs.writeFile("./db/db.json", note, (err) => {
+  // console.log(res.body, req.body);
+  // const note = stringify(req.body);
+  fs.writeFile("./db/db.json", ",", (err) => {
     if (err) {
     } else {
       console.log("saving notes");
-      res.append(note);
+      res.append(req.body);
     }
     console.log("written successfully");
   });
