@@ -57,7 +57,10 @@ app.post("/api/notes", (req, res) => {
       const noteNew = req.body;
       console.log(noteNew);
       notes.push(noteNew);
-      fs.writeFileSync(path.join(__dirname, "./db/db.json"), notes);
+      fs.writeFileSync(
+        path.join(__dirname, "./db/db.json"),
+        JSON.stringify(notes)
+      );
     }
   });
 });
