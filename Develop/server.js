@@ -32,7 +32,7 @@ app.get("/api/notes", (req, res) => {
       console.error(err);
     } else {
       // Convert string into JSON object
-      const notes = JSON.parse(data);
+      const notes = JSON.parse([data]);
       console.log("data", data);
       console.log("notes", notes);
 
@@ -54,7 +54,7 @@ app.post("/api/notes", (req, res) => {
     if (err) {
     } else {
       console.log("saving notes");
-      res.json(note);
+      res.send(note);
     }
     console.log("written successfully");
   });
