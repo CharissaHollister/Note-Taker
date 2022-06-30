@@ -42,12 +42,12 @@ app.get("/api/notes", (req, res) => {
 });
 //look for new notes and add to db
 app.post("/api/notes", (req, res) => {
-  fs.writeFile("./db/db.json", note, (err) => {
+  fs.writeFile("./db/db.json", notes, (err) => {
     if (err) {
     } else {
       // const notes = req.body;
       console.log("saving notes");
-      res.json(note);
+      res.json(notes);
     }
     console.log("written successfully");
   });
