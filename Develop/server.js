@@ -47,13 +47,13 @@ app.post("/api/notes", (req, res) => {
       console.error(err);
     } else {
       const notes = JSON.parse([data]);
-      const newNotes = JSON.stringify(notes) + req.body;
+      const newNotes = JSON.stringify(notes) + "," + req.body;
 
       // notes.push(req.body);
       // res.json(notes);
       console.log(res.body, req.body, notes, data, newNotes);
       // const note = stringify(req.body);
-      fs.writeFile("./db/db.json", ",", (err) => {
+      fs.writeFile("./db/db.json", newNotes, (err) => {
         if (err) {
         } else {
           console.log("saving notes");
