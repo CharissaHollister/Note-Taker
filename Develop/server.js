@@ -47,12 +47,7 @@ app.post("/api/notes", (req, res) => {
     if (err) {
       console.error(err);
     } else {
-      // Convert string into JSON object
       const notes = JSON.parse(data);
-      // res.json(notes);
-      // console.log(notes);
-
-      // req.body.id = notes.length;
       req.body.id = generateUniqueId();
       const noteNew = req.body;
       console.log(noteNew);
@@ -61,6 +56,7 @@ app.post("/api/notes", (req, res) => {
         path.join(__dirname, "./db/db.json"),
         JSON.stringify(notes)
       );
+      res.send("ok");
     }
   });
 });
