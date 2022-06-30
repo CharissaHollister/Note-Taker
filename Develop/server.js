@@ -42,25 +42,25 @@ app.get("/api/notes", (req, res) => {
 });
 //look for new notes and add to db
 app.post("/api/notes", (req, res) => {
-  fs.readFile("./db/db.json", "utf8", (err, data) => {
+  // fs.readFile("./db/db.json", "utf8", (err, data) => {
+  //   if (err) {
+  //     console.error(err);
+  //   } else {
+  //     const notes = data + req.body;
+  // notes.push(req.body);
+  // res.json(notes);
+  fs.writeFile("./db/db.json", "utf8", (err) => {
     if (err) {
-      console.error(err);
     } else {
-      const notes = data + req.body;
-      // notes.push(req.body);
-      // res.json(notes);
-      fs.writeFile("./db/db.json", notes, (err) => {
-        if (err) {
-        } else {
-          // const notes = req.body;
-          console.log("saving notes");
-          res.json(notes);
-        }
-        console.log("written successfully");
-      });
+      // const notes = req.body;
+      console.log("saving notes");
+      res.json(body);
     }
+    console.log("written successfully");
   });
+  // }
 });
+// });
 //delete note
 app.delete("/api/notes/:id", (req, res) => {
   fs.writeFile("./db/db.json", notes, (err) => {
