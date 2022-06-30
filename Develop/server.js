@@ -2,7 +2,7 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-
+const { dbNotes } = require("./db/db");
 // generating unique ids
 const generateUniqueId = require("generate-unique-id");
 const { get } = require("http");
@@ -33,7 +33,7 @@ app.get("/api/notes", (req, res) => {
       console.error(err);
     } else {
       // Convert string into JSON object
-      const notes = JSON.parse([data]);
+      const notes = JSON.parse(data);
       console.log("data", data);
       console.log("notes", notes);
 
@@ -43,44 +43,53 @@ app.get("/api/notes", (req, res) => {
 });
 //look for new notes and add to db
 app.post("/api/notes", (req, res) => {
-  // fs.readFile("./db/db.json", "utf8", (err, data) => {
-  //   if (err) {
-  //     console.error(err);
-  //   } else {
-  // const notes = JSON.parse([data]);
-  //     const note = req.body;
-  //     const newNotes = data + "," + note;
-
-  //     // notes.push(req.body);
-  //     // res.json(notes);
-  //     console.log(res.body, req.body, data, newNotes);
-  // const note = stringify(req.body);
-  const newNotes = req.body;
-  fs.appendFileSync("./db/db.json", stringify(newNotes), (err) => {
-    if (err) {
-    } else {
-      console.log("saving notes", newNotes);
-
-      res.json(newNotes);
-    }
-    console.log("written successfully");
-  });
-  // }
+  req.body.id = dbNotes.length.tostring();
+  const noteNew = body;
+  res.push(noteNew);
+  fs.writeFileSync(
+    path.join(__dirname, "./db/db.json"),
+    JSON.stringify({ noteNew: res }, null, 2)
+  );
 });
+// fs.readFile("./db/db.json", "utf8", (err, data) => {
+//   if (err) {
+//     console.error(err);
+//   } else {
+//     const note = req.body;
+//     const newNotes = data + "," + note;
+// const new1 = JSON.parse(data);
+//     // notes.push(req.body);
+//     // res.json(notes);
+//     console.log(res.body, req.body, data, newNotes);
+// const note = stringify(req.body);
+// const newNotes = new1.push(JSON.parse(req.body));
+// const newNotes = req.body;
+// console.log(newNotes);
+//   fs.writeFile("./db/db.json", req.body, (err) => {
+//     if (err) {
+//     } else {
+//       console.log("saving notes");
+
+//       // res.send(newNotes);
+//     }
+//     console.log("written successfully");
+//   });
+//   // }
 // });
+// // });
 //delete note
-app.delete("/api/notes/:id", (req, res) => {
-  fs.writeFile("./db/db.json", notes, (err) => {
-    if (err) {
-      console.error(err);
-    } else {
-      // Convert string into JSON object
-      // const notes = JSON.stringify(data);
-      console.log("delete");
-      res.json.stringify(notes); ///or should it be res.send???
-    }
-  });
-});
+// app.delete("/api/notes/:id", (req, res) => {
+//   fs.writeFile("./db/db.json", notes, (err) => {
+//     if (err) {
+//       console.error(err);
+//     } else {
+//       // Convert string into JSON object
+//       // const notes = JSON.stringify(data);
+//       console.log("delete");
+//       res.json.stringify(notes); ///or should it be res.send???
+//     }
+//   });
+// });
 /////////////end of routes
 
 //run app listener
