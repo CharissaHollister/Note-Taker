@@ -2,7 +2,7 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-const { dbNotes } = require("./db/db");
+
 // generating unique ids
 const generateUniqueId = require("generate-unique-id");
 const { get } = require("http");
@@ -43,13 +43,23 @@ app.get("/api/notes", (req, res) => {
 });
 //look for new notes and add to db
 app.post("/api/notes", (req, res) => {
-  req.body.id = dbNotes.length.tostring();
-  const noteNew = body;
-  res.push(noteNew);
-  fs.writeFileSync(
-    path.join(__dirname, "./db/db.json"),
-    JSON.stringify({ noteNew: res }, null, 2)
-  );
+  fs.readFile("./db/db.json", "utf8", (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      // Convert string into JSON object
+      const notes = JSON.parse(data);
+      // res.json(notes);
+      // console.log(notes);
+
+      // req.body.id = notes.length;
+      req.body.id = generateUniqueId();
+      const noteNew = req.body;
+      console.log(noteNew);
+      notes.push(noteNew);
+      fs.writeFileSync(path.join(__dirname, "./db/db.json"), notes);
+    }
+  });
 });
 // fs.readFile("./db/db.json", "utf8", (err, data) => {
 //   if (err) {
