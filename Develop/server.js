@@ -6,6 +6,7 @@ const fs = require("fs");
 // generating unique ids
 const generateUniqueId = require("generate-unique-id");
 const { get } = require("http");
+const { stringify } = require("querystring");
 
 // Initialize and parse express app
 const PORT = process.env.PORT || 3001;
@@ -42,29 +43,31 @@ app.get("/api/notes", (req, res) => {
 });
 //look for new notes and add to db
 app.post("/api/notes", (req, res) => {
-  fs.readFile("./db/db.json", "utf8", (err, data) => {
-    if (err) {
-      console.error(err);
-    } else {
-      // const notes = JSON.parse([data]);
-      const note = req.body;
-      const newNotes = data + "," + note;
+  // fs.readFile("./db/db.json", "utf8", (err, data) => {
+  //   if (err) {
+  //     console.error(err);
+  //   } else {
+  // const notes = JSON.parse([data]);
+  //     const note = req.body;
+  //     const newNotes = data + "," + note;
 
-      // notes.push(req.body);
-      // res.json(notes);
-      console.log(res.body, req.body, data, newNotes);
-      // const note = stringify(req.body);
-      fs.writeFile("./db/db.json", newNotes, (err) => {
-        if (err) {
-        } else {
-          console.log("saving notes");
-          res.json(newNotes);
-        }
-        console.log("written successfully");
-      });
+  //     // notes.push(req.body);
+  //     // res.json(notes);
+  //     console.log(res.body, req.body, data, newNotes);
+  // const note = stringify(req.body);
+  const newNotes = req.body;
+  fs.appendFileSync("./db/db.json", stringify(newNotes), (err) => {
+    if (err) {
+    } else {
+      console.log("saving notes", newNotes);
+
+      res.json(newNotes);
     }
+    console.log("written successfully");
   });
+  // }
 });
+// });
 //delete note
 app.delete("/api/notes/:id", (req, res) => {
   fs.writeFile("./db/db.json", notes, (err) => {
