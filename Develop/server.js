@@ -42,26 +42,28 @@ app.get("/api/notes", (req, res) => {
 });
 //look for new notes and add to db
 app.post("/api/notes", (req, res) => {
-  // fs.readFile("./db/db.json", "utf8", (err, data) => {
-  //   if (err) {
-  //     console.error(err);
-  //   } else {
-  //     const notes = data + req.body;
-  // notes.push(req.body);
-  // res.json(notes);
-  // console.log(res.body, req.body);
-  // const note = stringify(req.body);
-  fs.writeFile("./db/db.json", ",", (err) => {
+  fs.readFile("./db/db.json", "utf8", (err, data) => {
     if (err) {
+      console.error(err);
     } else {
-      console.log("saving notes");
-      res.append(req.body);
+      const notes = JSON.parse([data]);
+      const newNotes = json.stringify(notes) + req.body;
+
+      // notes.push(req.body);
+      // res.json(notes);
+      console.log(res.body, req.body, notes, data, newNotes);
+      // const note = stringify(req.body);
+      fs.writeFile("./db/db.json", ",", (err) => {
+        if (err) {
+        } else {
+          console.log("saving notes");
+          res.send(newNotes);
+        }
+        console.log("written successfully");
+      });
     }
-    console.log("written successfully");
   });
-  // }
 });
-// });
 //delete note
 app.delete("/api/notes/:id", (req, res) => {
   fs.writeFile("./db/db.json", notes, (err) => {
