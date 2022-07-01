@@ -15,8 +15,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-/////////////////pull in routes
-// require("./public/routes/routes.js");
 //populate index.html file for the website on landing
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/index.html"))
