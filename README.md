@@ -7,7 +7,7 @@ This is a Note Taker app that allows the user to write and save a note. You can 
 
 ## Live Website:
 
-https://charissahollister.github.io/Note-Taker/
+https://fathomless-plains-16786.herokuapp.com/
 
 ### GitHub Repo:
 
