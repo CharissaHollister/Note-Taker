@@ -1,26 +1,15 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "note taker using express",
-  "main": "index.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CharissaHollister/Note-Taker.git"
-  },
-  "author": "charissa hollister",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/CharissaHollister/Note-Taker/issues"
-  },
-  "homepage": "https://github.com/CharissaHollister/Note-Taker#readme",
-  "keywords": [],
   "dependencies": {
-    "express": "^4.18.1",
-    "fs": "^0.0.1-security",
-    "generate-unique-id": "^2.0.1",
-    "path": "^0.12.7"
+    "express": "^4.16.4",
+    "uniqid": "^5.4.0"
   }
 }
