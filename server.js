@@ -5,8 +5,6 @@ const fs = require("fs");
 
 // generating unique ids
 const generateUniqueId = require("uniqid");
-const { get } = require("http");
-const { stringify } = require("querystring");
 
 // Initialize and parse express app
 const PORT = process.env.PORT || 3001;
@@ -31,8 +29,6 @@ app.get("/api/notes", (req, res) => {
     } else {
       // Convert string into JSON object
       const notes = JSON.parse(data);
-      console.log("data", data);
-      console.log("notes", notes);
 
       res.json(notes);
     }
@@ -47,7 +43,6 @@ app.post("/api/notes", (req, res) => {
       const notes = JSON.parse(data);
       req.body.id = generateUniqueId();
       const noteNew = req.body;
-      console.log(noteNew);
       notes.push(noteNew);
       fs.writeFileSync(
         path.join(__dirname, "./db/db.json"),

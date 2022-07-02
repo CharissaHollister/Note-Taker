@@ -147,7 +147,6 @@ const renderNoteList = async (notes) => {
         "text-danger",
         "delete-note"
       );
-      delBtnEl.innerHTML = "D"; //remove later, for testing only
       delBtnEl.addEventListener("click", handleNoteDelete);
 
       liEl.append(delBtnEl);
