@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 
 // generating unique ids
-const generateUniqueId = require("generate-unique-id");
+const generateUniqueId = require("uniqid");
 const { get } = require("http");
 const { stringify } = require("querystring");
 
