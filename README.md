@@ -3,7 +3,8 @@
 Authored by Charissa Hollister 06/22/2022
 
 ## Description
-This is a Note Taker app that allows the user to write and save a note. You can save multiple notes that will be saved within the db file and folder keeping previously written data for later use. Notes can be deleted as desired by the user. 
+
+This is a Note Taker app that allows the user to write and save a note. You can save multiple notes that will be saved within the db file and folder keeping previously written data for later use. Notes can be deleted as desired by the user.
 
 ## Live Website:
 
@@ -12,6 +13,9 @@ https://charissahollister.github.io/Note-Taker/
 ### GitHub Repo:
 
 https://github.com/CharissaHollister/Note-Taker
+
+![ScreenShot](./Screenshot%201.jpg)
+![ScreenShot](./Screenshot%202.jpg)
 
 ### Minimum customer criteria
 
